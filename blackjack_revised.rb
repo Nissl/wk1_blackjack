@@ -32,6 +32,27 @@ def score(cards)
   total
 end
 
+def blackjack_check(player_cards, player_score, dealer_cards, dealer_score, name)
+  blackjack = false
+  if player_score == 21
+    blackjack = true
+    read_cards(player_cards, player_score, dealer_cards, name)
+    puts "Blackjack!"
+    if dealer_score != 21
+      puts "You win! Congrats!"
+    else 
+      deal_read_cards(dealer_cards, dealer_score)
+      puts "But the dealer also has blackjack. You draw."
+    end
+  elsif dealer_score == 21
+    blackjack = true
+    read_cards(player_cards, player_score, dealer_cards, name)
+    deal_read_cards(dealer_cards, dealer_score)
+    puts "Sorry, the dealer has blackjack. You lose."
+  end
+  blackjack
+end
+
 def play_player_hand(deck, player_cards, player_score, dealer_cards, name)
   read_cards(player_cards, player_score, dealer_cards, name)
   while true  
@@ -122,8 +143,9 @@ name = gets.chomp
 
 # Adjust number of decks used to prevent counting (bonus question)
 deck_num = 5
-vals = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 
-        'Ace']
+# vals = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 
+#         'Ace']
+vals = ['10', 'Ace']
 suits = %w(Clubs Diamonds Hearts Spades)
 deck = vals.product(suits)
 (deck_num - 1).times do
@@ -140,19 +162,9 @@ while true
     player_score = score(player_cards)
     dealer_score = score(dealer_cards)
 
-    if player_score == 21
-      read_cards(player_cards, player_score, dealer_cards, name)
-      puts "Blackjack!"
-      if dealer_score != 21
-        puts "You win! Congrats!"
-      else 
-        puts "But the dealer also has blackjack. You draw."
-      end
-      break
-    end
-    if dealer_score == 21
-      read_cards(player_cards, player_score, dealer_cards, name)
-      puts "Sorry, the dealer has blackjack. You lose."
+    blackjack = blackjack_check(player_cards, player_score, dealer_cards, 
+                                 dealer_score, name)
+    if blackjack
       break
     end
 
