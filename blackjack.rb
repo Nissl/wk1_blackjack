@@ -1,8 +1,10 @@
 # This blackjack program has been coded without looking at any solutions.
 
+# Adjust number of decks used to prevent counting (bonus question)
+deck_num = 1
 vals = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king', 'ace']
 suits = %w(clubs diamonds hearts spades)
-deck_num = 1
+
 
 def make_deck(vals, suits, deck_num)
   deck = []
