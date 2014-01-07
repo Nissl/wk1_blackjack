@@ -1,10 +1,9 @@
-require 'pry'
-# A moderate refactoring of the blackjack program I wrote after watching  
-#   solutions.
+# A slight refactoring of the blackjack program I wrote after watching  
+#   solutions videos.
 
-def single_deal(deck, cards, dealer = 0)
+def single_deal(deck, cards, player = 1)
   card = deck.pop  
-  if dealer == 0
+  if player == 1
     puts "You draw a #{card[0]} of #{card[1]}"
   else 
     puts "The dealer draws a #{card[0]} of #{card[1]}"
@@ -61,7 +60,7 @@ def play_player_hand(deck, player_cards, player_score, dealer_cards, name)
     if input == "stay"
       break
     elsif input == "hit"
-      player_cards = single_deal(deck, player_cards, dealer = 0)
+      player_cards = single_deal(deck, player_cards, player = 1)
       player_score = score(player_cards)
       read_cards(player_cards, player_score, dealer_cards, name)
     else
@@ -97,7 +96,7 @@ end
 
 def play_dealer_hand(deck, dealer_cards, dealer_score)
   while dealer_score < 17
-    dealer_cards = single_deal(deck, dealer_cards, dealer = 1)
+    dealer_cards = single_deal(deck, dealer_cards, player = 0)
     dealer_score = score(dealer_cards)
     deal_read_cards(dealer_cards, dealer_score)
     sleep(1)
@@ -141,7 +140,7 @@ end
 puts "Welcome to John Morgan's procedural blackjack game! Please enter name:"
 name = gets.chomp
 
-# Adjust number of decks used to prevent counting (bonus question)
+# Adjust number of decks used to prevent counting (bonus question).
 deck_num = 5
 vals = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 
         'Ace']
