@@ -143,9 +143,8 @@ name = gets.chomp
 
 # Adjust number of decks used to prevent counting (bonus question)
 deck_num = 5
-# vals = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 
-#         'Ace']
-vals = ['10', 'Ace']
+vals = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 
+        'Ace']
 suits = %w(Clubs Diamonds Hearts Spades)
 deck = vals.product(suits)
 (deck_num - 1).times do
